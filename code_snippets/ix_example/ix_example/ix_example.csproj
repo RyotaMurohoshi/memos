@@ -40,7 +40,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
+    <Compile Include="RepeatExample.cs" />
+    <Compile Include="ReturnExample.cs" />
+    <Compile Include="ConcatExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
