@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace ix_example
 {
 	[TestFixture ()]
-	public class ReturnTest
+	public class ConcatTest
 	{
 		// see https://github.com/Reactive-Extensions/Rx.NET/blob/master/Ix.NET/Source/System.Interactive/EnumerableEx.Creation.cs#L66 
 		[Test ()]

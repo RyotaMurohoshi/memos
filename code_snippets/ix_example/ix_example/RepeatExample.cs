@@ -6,7 +6,7 @@ namespace ix_example
 {
 
 	[TestFixture ()]
-	public class RepeatTest
+	public class RepeatExample
 	{
 		// see https://github.com/Reactive-Extensions/Rx.NET/blob/master/Ix.NET/Source/System.Interactive/EnumerableEx.Creation.cs#L172
 		[Test ()]
@@ -60,4 +60,5 @@ namespace ix_example
 		}
 	}
 }
+
 
