@@ -46,6 +46,7 @@
     <Compile Include="SelectManyExample.cs" />
     <Compile Include="SkipLastExample.cs" />
     <Compile Include="TakeLastExample.cs" />
+    <Compile Include="BufferExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
