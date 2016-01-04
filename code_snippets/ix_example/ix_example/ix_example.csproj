@@ -44,6 +44,7 @@
     <Compile Include="ReturnExample.cs" />
     <Compile Include="ConcatExample.cs" />
     <Compile Include="SelectManyExample.cs" />
+    <Compile Include="SkipLastExample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
