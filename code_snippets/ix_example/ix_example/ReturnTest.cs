@@ -7,6 +7,7 @@ namespace ix_example
 	[TestFixture ()]
 	public class ReturnTest
 	{
+		// see https://github.com/Reactive-Extensions/Rx.NET/blob/master/Ix.NET/Source/System.Interactive/EnumerableEx.Creation.cs#L66 
 		[Test ()]
 		public void TestReturnIntCase ()
 		{
@@ -15,6 +16,7 @@ namespace ix_example
 			Assert.That (intEnumerable.First (), Is.EqualTo (0));
 		}
 
+		// see https://github.com/Reactive-Extensions/Rx.NET/blob/master/Ix.NET/Source/System.Interactive/EnumerableEx.Creation.cs#L66 
 		[Test ()]
 		public void TestReturnStringCase ()
 		{
