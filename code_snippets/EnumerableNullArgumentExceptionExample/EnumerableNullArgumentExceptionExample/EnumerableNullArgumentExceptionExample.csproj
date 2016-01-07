@@ -40,5 +40,6 @@
   <ItemGroup>
     <Compile Include="TestLinq.cs" />
     <Compile Include="TestMyLinqBad.cs" />
+    <Compile Include="TestMyLinq.cs" />
   </ItemGroup>
 </Project>
