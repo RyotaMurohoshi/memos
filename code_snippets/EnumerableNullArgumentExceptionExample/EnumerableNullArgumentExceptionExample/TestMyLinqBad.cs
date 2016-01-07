@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EnumerableNullArgumentExceptionExample
+namespace EnumerableNullArgumentExceptionExample.Bad
 {
 	[TestFixture ()]
 	public class TestMyLinq
@@ -13,9 +13,10 @@ namespace EnumerableNullArgumentExceptionExample
 			IEnumerable<int> intEnumerable = new int[]{ 3, 1, 4, 1, 5, 9, 2 };
 			Func<int, int> nullSelector = null;
 
-			Assert.Catch<ArgumentNullException> (() => {
-				intEnumerable.Map (nullSelector);
-			});
+			// //Next test cannot pass. Must add null handling exactlly.
+			// Assert.Catch<ArgumentNullException> (() => {
+			//	intEnumerable.Map (nullSelector);
+			// });
 
 			Assert.Catch<ArgumentNullException> (() => {
 				foreach (int num in intEnumerable.Map (nullSelector)) {
@@ -30,9 +31,10 @@ namespace EnumerableNullArgumentExceptionExample
 			IEnumerable<int> intEnumerable = new int[]{ 3, 1, 4, 1, 5, 9, 2 };
 			Func<int, bool> nullPredicate = null;
 
-			Assert.Catch<ArgumentNullException> (() => {
-				intEnumerable.Filter (nullPredicate);
-			});
+			// //Next test cannot pass. Must add null handling exactlly.
+			// Assert.Catch<ArgumentNullException> (() => {
+			//	intEnumerable.Filter (nullPredicate);
+			// });
 
 			Assert.Catch<ArgumentNullException> (() => {
 				foreach (int num in intEnumerable.Filter (nullPredicate)) {
@@ -51,11 +53,6 @@ namespace EnumerableNullArgumentExceptionExample
 			if (predicate == null)
 				throw new ArgumentNullException ("predicate");
 
-			return source.Filter_ (predicate);
-		}
-
-		private static  IEnumerable<TSource> Filter_<TSource> (this IEnumerable<TSource> source, Func<TSource,bool> predicate)
-		{
 			foreach (TSource element in source) {
 				if (predicate (element)) {
 					yield return element;
@@ -70,17 +67,10 @@ namespace EnumerableNullArgumentExceptionExample
 			if (selector == null)
 				throw new ArgumentNullException ("selector");
 
-			return source.Map_ (selector);
-		}
-
-		public static IEnumerable<TResult> Map_<TSource, TResult> (this IEnumerable<TSource> source, Func<TSource,TResult> selector)
-		{
 			foreach (TSource element in source) {
 				yield return selector (element);
 			}
 		}
 	}
 }
-
-
 
