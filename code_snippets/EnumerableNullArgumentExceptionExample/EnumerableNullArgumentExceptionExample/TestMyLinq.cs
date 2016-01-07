@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EnumerableNullArgumentExceptionExample
+namespace EnumerableNullArgumentExceptionExample.Bad
 {
 	[TestFixture ()]
 	public class TestMyLinq
@@ -13,6 +13,7 @@ namespace EnumerableNullArgumentExceptionExample
 			IEnumerable<int> intEnumerable = new int[]{ 3, 1, 4, 1, 5, 9, 2 };
 			Func<int, int> nullSelector = null;
 
+			// //Next test cannot pass.
 			// must add null handling exactlly.
 			// Assert.Catch<ArgumentNullException> (() => {
 			//	intEnumerable.Map (nullSelector);
@@ -26,11 +27,12 @@ namespace EnumerableNullArgumentExceptionExample
 		}
 
 		[Test ()]
-		public void TestWhere ()
+		public void TestFilter ()
 		{
 			IEnumerable<int> intEnumerable = new int[]{ 3, 1, 4, 1, 5, 9, 2 };
 			Func<int, bool> nullPredicate = null;
 
+			// //Next test cannot pass. 
 			// Assert.Catch<ArgumentNullException> (() => {
 			//	intEnumerable.Filter (nullPredicate);
 			// });
@@ -43,7 +45,7 @@ namespace EnumerableNullArgumentExceptionExample
 		}
 	}
 
-	public static class MyEnumerable
+	public static class MyEnumerableBad
 	{
 		public static IEnumerable<TSource> Filter<TSource> (this IEnumerable<TSource> source, Func<TSource,bool> predicate)
 		{
@@ -64,7 +66,7 @@ namespace EnumerableNullArgumentExceptionExample
 			if (source == null)
 				throw new ArgumentNullException ("source");
 			if (selector == null)
-				throw new ArgumentNullException ("predicate");
+				throw new ArgumentNullException ("selector");
 
 			foreach (TSource element in source) {
 				yield return selector (element);
