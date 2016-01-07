@@ -13,8 +13,7 @@ namespace EnumerableNullArgumentExceptionExample.Bad
 			IEnumerable<int> intEnumerable = new int[]{ 3, 1, 4, 1, 5, 9, 2 };
 			Func<int, int> nullSelector = null;
 
-			// //Next test cannot pass.
-			// must add null handling exactlly.
+			// //Next test cannot pass. Must add null handling exactlly.
 			// Assert.Catch<ArgumentNullException> (() => {
 			//	intEnumerable.Map (nullSelector);
 			// });
@@ -32,7 +31,7 @@ namespace EnumerableNullArgumentExceptionExample.Bad
 			IEnumerable<int> intEnumerable = new int[]{ 3, 1, 4, 1, 5, 9, 2 };
 			Func<int, bool> nullPredicate = null;
 
-			// //Next test cannot pass. 
+			// //Next test cannot pass. Must add null handling exactlly.
 			// Assert.Catch<ArgumentNullException> (() => {
 			//	intEnumerable.Filter (nullPredicate);
 			// });
