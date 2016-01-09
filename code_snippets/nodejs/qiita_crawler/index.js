@@ -8,4 +8,5 @@ x(url,
     [{
         title: 'h1 a'
     }])
+    .paginate('ul.pagination a.js-next-page-link@href')
     .write('results.json');
