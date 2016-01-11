@@ -2,7 +2,6 @@ var Xray = require('x-ray');
 var Promise = require("bluebird");
 var _ = require('underscore');
 
-var url = "http://qiita.com/advent-calendar/2015/unity";
 var x = Xray();
 
 function crawlTargetCalendar(calendarUrl) {
@@ -33,4 +32,22 @@ function convertStatistics(crawlingResult) {
     function isQiitaItem(aDay) { return isPosted(aDay) && isQiitaUrl(aDay.item_url); }
 }
 
-crawlTargetCalendar(url).then(convertStatistics).then(console.log);
+function crawlQiitaAllCalendars() {
+    return new Promise(function (resolve, reject) {
+        x("http://qiita.com/advent-calendar/2015/calendars", ".adventCalendarList tr",
+            [{
+                title: ".adventCalendarList_calendarTitle a",
+                url: ".adventCalendarList_calendarTitle a@href",
+            }])
+            .paginate(".js-next-page-link@href")
+            (function (error, result) {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+    });
+}
+
+crawlQiitaAllCalendars().then(console.log);
