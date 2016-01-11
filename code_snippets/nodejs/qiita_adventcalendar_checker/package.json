@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.1.1",
+    "underscore": "^1.8.3",
     "x-ray": "^2.0.3"
   }
 }
