@@ -9,7 +9,7 @@ function crawlTargetCalendar(calendarUrl) {
         x(calendarUrl, ".adventCalendarCalendar_day",
             [{
                 day: ".adventCalendarCalendar_date",
-                item_url: ".adventCalendarCalendar_comment a@href"
+                url: ".adventCalendarCalendar_comment a@href"
             }])
             (function (error, result) {
                 if (error) {
@@ -27,9 +27,9 @@ function convertStatistics(crawlingResult) {
         qiitaItemCount: _.filter(crawlingResult, isQiitaItem).length,
     };
 
-    function isPosted(aDay) { return !!(aDay.item_url); }
+    function isPosted(aDay) { return !!(aDay.url); }
     function isQiitaUrl(itemUrl) { return itemUrl.indexOf("http://qiita.com") == 0; }
-    function isQiitaItem(aDay) { return isPosted(aDay) && isQiitaUrl(aDay.item_url); }
+    function isQiitaItem(aDay) { return isPosted(aDay) && isQiitaUrl(aDay.url); }
 }
 
 function crawlQiitaAllCalendars() {
@@ -50,4 +50,17 @@ function crawlQiitaAllCalendars() {
     });
 }
 
-crawlQiitaAllCalendars().then(console.log);
+function crawlCalendarFromBaseInfo(calendarBaseInfo) {
+    return crawlTargetCalendar(calendarBaseInfo.url)
+        .delay(1)
+        .then(convertStatistics)
+        .then(function (statistics) {
+            statistics.title = calendarBaseInfo.title;
+            statistics.url = calendarBaseInfo.url;
+            return statistics;
+        })
+}
+
+crawlQiitaAllCalendars()
+    .then(function (results) { return Promise.all(_.map(results, crawlCalendarFromBaseInfo)); })
+    .then(console.log);
