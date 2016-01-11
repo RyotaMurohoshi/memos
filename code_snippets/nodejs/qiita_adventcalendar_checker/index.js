@@ -24,8 +24,13 @@ function crawlTargetCalendar(calendarUrl) {
 
 function convertStatistics(crawlingResult) {
     return {
-        postedCount : _.filter(crawlingResult, function (aDay) { return !!(aDay.item_url) }).length,
+        postedCount: _.filter(crawlingResult, isPosted).length,
+        qiitaItemCount: _.filter(crawlingResult, isQiitaItem).length,
     };
+
+    function isPosted(aDay) { return !!(aDay.item_url); }
+    function isQiitaUrl(itemUrl) { return itemUrl.indexOf("http://qiita.com") == 0; }
+    function isQiitaItem(aDay) { return isPosted(aDay) && isQiitaUrl(aDay.item_url); }
 }
 
 crawlTargetCalendar(url).then(convertStatistics).then(console.log);
