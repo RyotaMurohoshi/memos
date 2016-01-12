@@ -33,6 +33,15 @@ type Test() =
         Assert.AreEqual([1; 2; 3; 4; 5] |> List.find isEven, 2)
 
     [<Test>]
+    member x.TestFindIndex() =
+        Assert.AreEqual([1; 2; 3; 4; 5] |> List.findIndex isEven, 1)
+
+    [<Test>]
+    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    member x.TestFindIndex_Exception() =
+        [1; 2; 3; 4; 5] |> List.findIndex isZero
+
+    [<Test>]
     [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
     member x.TestFind_Exception() =
         [1; 2; 3; 4; 5] |> List.find isZero
@@ -45,3 +54,12 @@ type Test() =
     [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
     member x.TestFindLast_Exception() =
         [1; 2; 3; 4; 5] |> List.findBack isZero
+
+    [<Test>]
+    member x.TestFindIndexBack() =
+        Assert.AreEqual([1; 2; 3; 4; 5] |> List.findIndexBack isEven, 3)
+
+    [<Test>]
+    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    member x.TestFindIndexBack_Exception() =
+        [1; 2; 3; 4; 5] |> List.findIndexBack isZero
