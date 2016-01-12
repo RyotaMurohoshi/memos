@@ -63,3 +63,23 @@ type Test() =
     [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
     member x.TestFindIndexBack_Exception() =
         [1; 2; 3; 4; 5] |> List.findIndexBack isZero
+
+    [<Test>]
+    member x.TestTryFind() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFind isEven, Some(2))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFind isZero, None)
+
+    [<Test>]
+    member x.TestTryFindBack() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindBack isEven, Some(4))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindBack isZero, None)
+
+    [<Test>]
+    member x.TestTryFindIndex() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndex isEven, Some(1))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndex isZero, None)
+
+    [<Test>]
+    member x.TestTryFindIndexBack() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndexBack isEven, Some(3))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndexBack isZero, None)
