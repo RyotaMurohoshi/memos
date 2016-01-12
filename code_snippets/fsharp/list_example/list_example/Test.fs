@@ -3,10 +3,11 @@ open System
 open NUnit.Framework
 
 [<TestFixture>]
-type Test() = 
+type Test() =
 
     let double n = n * 2
     let isEven n = n % 2 = 0
+    let isZero n = n = 0
 
     [<Test>]
     member x.TestMap() =
@@ -25,4 +26,22 @@ type Test() =
     [<Test>]
     member x.TestExists() =
         Assert.IsTrue([1; 2; 3; 4; 5] |> List.exists isEven)
-        Assert.IsFalse([1; 2; 3; 4; 5] |> List.exists (fun n -> n = 0))
+        Assert.IsFalse([1; 2; 3; 4; 5] |> List.exists isZero)
+
+    [<Test>]
+    member x.TestFind() =
+        Assert.AreEqual([1; 2; 3; 4; 5] |> List.find isEven, 2)
+
+    [<Test>]
+    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    member x.TestFind_Exception() =
+        [1; 2; 3; 4; 5] |> List.find isZero
+
+    [<Test>]
+    member x.TestFindBack() =
+        Assert.AreEqual([1; 2; 3; 4; 5] |> List.findBack isEven, 4)
+
+    [<Test>]
+    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    member x.TestFindLast_Exception() =
+        [1; 2; 3; 4; 5] |> List.findBack isZero
