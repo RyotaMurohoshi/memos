@@ -37,12 +37,12 @@ type Test() =
         Assert.AreEqual([1; 2; 3; 4; 5] |> List.findIndex isEven, 1)
 
     [<Test>]
-    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    [<ExpectedException(typeof<Collections.Generic.KeyNotFoundException>)>]
     member x.TestFindIndex_Exception() =
         [1; 2; 3; 4; 5] |> List.findIndex isZero
 
     [<Test>]
-    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    [<ExpectedException(typeof<Collections.Generic.KeyNotFoundException>)>]
     member x.TestFind_Exception() =
         [1; 2; 3; 4; 5] |> List.find isZero
 
@@ -51,7 +51,7 @@ type Test() =
         Assert.AreEqual([1; 2; 3; 4; 5] |> List.findBack isEven, 4)
 
     [<Test>]
-    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    [<ExpectedException(typeof<Collections.Generic.KeyNotFoundException>)>]
     member x.TestFindLast_Exception() =
         [1; 2; 3; 4; 5] |> List.findBack isZero
 
@@ -60,6 +60,57 @@ type Test() =
         Assert.AreEqual([1; 2; 3; 4; 5] |> List.findIndexBack isEven, 3)
 
     [<Test>]
-    [<ExpectedException("System.Collections.Generic.KeyNotFoundException")>]
+    [<ExpectedException(typeof<Collections.Generic.KeyNotFoundException>)>]
     member x.TestFindIndexBack_Exception() =
         [1; 2; 3; 4; 5] |> List.findIndexBack isZero
+
+    [<Test>]
+    member x.TestTryFind() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFind isEven, Some(2))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFind isZero, None)
+
+    [<Test>]
+    member x.TestTryFindBack() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindBack isEven, Some(4))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindBack isZero, None)
+
+    [<Test>]
+    member x.TestTryFindIndex() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndex isEven, Some(1))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndex isZero, None)
+
+    [<Test>]
+    member x.TestTryFindIndexBack() =
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndexBack isEven, Some(3))
+         Assert.AreEqual([1; 2; 3; 4; 5] |> List.tryFindIndexBack isZero, None)
+
+    [<Test>]
+    member x.TestZip() =
+         Assert.AreEqual(List.zip [1; 2; 3] ["a"; "b"; "c"], [(1,"a"); (2,"b"); (3,"c")])
+
+    [<Test>]
+    [<ExpectedException(typeof<System.ArgumentException>)>]
+    member x.TestZip_Exception() =
+         List.zip [1; 2; 3] [1;1;1;1;1;1]
+
+    [<Test>]
+    member x.TestZip3() =
+         Assert.AreEqual(List.zip3 [1; 2; 3] ["a"; "b"; "c"] [3.0; 1.0; 4.0], [(1,"a", 3.0); (2,"b", 1.0); (3,"c", 4.0)])
+
+    [<Test>]
+    [<ExpectedException(typeof<System.ArgumentException>)>]
+    member x.TestZip3_Exception() =
+        List.zip3 [1; 2; 3; 4] ["a"; "b"] [3.0; 1.0; 4.0]
+
+    [<Test>]
+    member x.TestUnzip() =
+         let listA, listB = List.unzip [(1,"a"); (2,"b"); (3,"c")]
+         Assert.AreEqual(listA, [1; 2; 3])
+         Assert.AreEqual(listB, ["a"; "b"; "c"])
+
+    [<Test>]
+    member x.TestUnzip3() =
+         let listA, listB, listC = List.unzip3 [(1,"a", 3.0); (2,"b", 1.0); (3, "c", 4.0)]
+         Assert.AreEqual(listA, [1; 2; 3])
+         Assert.AreEqual(listB, ["a"; "b"; "c"])
+         Assert.AreEqual(listC, [3.0; 1.0; 4.0])
