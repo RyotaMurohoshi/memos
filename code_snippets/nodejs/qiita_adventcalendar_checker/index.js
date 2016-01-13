@@ -1,3 +1,4 @@
+'use strict'
 var Xray = require('x-ray');
 var Promise = require("bluebird");
 var _ = require('underscore');
@@ -52,7 +53,6 @@ function crawlQiitaAllCalendars() {
 
 function crawlCalendarFromBaseInfo(calendarBaseInfo) {
     return crawlTargetCalendar(calendarBaseInfo.url)
-        .delay(1)
         .then(convertStatistics)
         .then(function (statistics) {
             statistics.title = calendarBaseInfo.title;
@@ -61,6 +61,25 @@ function crawlCalendarFromBaseInfo(calendarBaseInfo) {
         })
 }
 
+function crawlSequentially(baseInfoArray) {
+    let tasks = baseInfoArray.map(convertToTask);
+    return sequenceExece(tasks);
+
+    function convertToTask(baseInfo) {
+        return () => crawlCalendarFromBaseInfo(baseInfo);
+    }
+}
+
+function sequenceExece(tasks) {
+    function recordValue(results, value) {
+        results.push(value);
+        return results;
+    }
+    let pushValue = recordValue.bind(null, []);
+    let initValue = Promise.resolve();
+    return tasks.reduce((promise, task) => promise.then(task).then(pushValue), initValue);
+}
+
 crawlQiitaAllCalendars()
-    .then(function (results) { return Promise.all(_.map(results, crawlCalendarFromBaseInfo)); })
-    .then(console.log);
+    .then(crawlSequentially)
+    .then(console.log)
