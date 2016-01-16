@@ -114,3 +114,38 @@ type Test() =
          Assert.AreEqual(listA, [1; 2; 3])
          Assert.AreEqual(listB, ["a"; "b"; "c"])
          Assert.AreEqual(listC, [3.0; 1.0; 4.0])
+
+    [<Test>]
+    member x.TestEmpty() =
+         let list = List.empty;
+         Assert.AreEqual(list, [])
+         Assert.IsTrue(list |> List.isEmpty)
+
+    [<Test>]
+    member x.TestHead() =
+         Assert.AreEqual([1; 2; 3] |> List.head, 1)
+         Assert.AreEqual([1] |> List.head, 1)
+
+    [<Test>]
+    [<ExpectedException(typeof<System.ArgumentException>)>]
+    member x.Head_Exception() =
+         [] |> List.head
+
+    [<Test>]
+    member x.TestTryHead() =
+         Assert.AreEqual([1; 2; 3] |> List.tryHead, Some(1))
+         Assert.AreEqual([1] |> List.tryHead, Some(1))
+         Assert.AreEqual([] |> List.tryHead, None)
+
+    [<Test>]
+    member x.TestTail() =
+         Assert.AreEqual([1; 2; 3] |> List.tail, [2; 3])
+         Assert.AreEqual([1; 2] |> List.tail, [2])
+
+         let emptyList : int list = []
+         Assert.AreEqual([1] |> List.tail, emptyList);
+
+    [<Test>]
+    [<ExpectedException(typeof<System.ArgumentException>)>]
+    member x.Tail_Exception() =
+         [] |> List.tail
