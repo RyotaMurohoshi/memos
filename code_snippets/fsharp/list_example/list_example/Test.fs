@@ -152,5 +152,12 @@ type Test() =
          [] |> List.tail
 
     [<Test>]
-    member x.TestChoose_Exception() =
+    member x.TestChoose() =
         Assert.AreEqual([-2; -1; 0; 1; 2] |> List.choose divideWith, [-0.5; -1.0; 1.0; 0.5])
+
+    [<Test>]
+    member x.TestChunkSize() =
+        Assert.AreEqual([-2; -1; 0; 1; 2] |> List.chunkBySize 2, [[-2; -1]; [0; 1]; [2]])
+        Assert.AreEqual([-2; -1; 0; 1] |> List.chunkBySize 2, [[-2; -1]; [0; 1]])
+        Assert.AreEqual([-2; -1] |> List.chunkBySize 2, [[-2; -1]])
+        Assert.AreEqual([-2] |> List.chunkBySize 2, [[-2]])
