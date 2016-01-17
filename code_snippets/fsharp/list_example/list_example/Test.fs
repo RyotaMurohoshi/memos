@@ -8,6 +8,7 @@ type Test() =
     let double n = n * 2
     let isEven n = n % 2 = 0
     let isZero n = n = 0
+    let divideWith n = if n = 0 then None else Some(1.0 / float(n))
 
     [<Test>]
     member x.TestMap() =
@@ -147,5 +148,9 @@ type Test() =
 
     [<Test>]
     [<ExpectedException(typeof<System.ArgumentException>)>]
-    member x.Tail_Exception() =
+    member x.testTail_Exception() =
          [] |> List.tail
+
+    [<Test>]
+    member x.TestChoose_Exception() =
+        Assert.AreEqual([-2; -1; 0; 1; 2] |> List.choose divideWith, [-0.5; -1.0; 1.0; 0.5])
