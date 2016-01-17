@@ -5,9 +5,11 @@ import com.mrstar.is_property.kotlin.KData;
 public class Main {
     public static void main(String[] args) {
         {
-            KData data = new KData("Kotlin", false, false, false, false);
+            KData data = new KData("Kotlin", "", "", false, false, false, false);
 
             System.out.println(data.getName());
+            System.out.println(data.isString0());
+            System.out.println(data.is_string1());
             System.out.println(data.getEnabled0());
             System.out.println(data.isEnabled1());
             System.out.println(data.is_enabled2());
@@ -18,6 +20,8 @@ public class Main {
             data.setEnabled1(true);
             data.set_enabled2(true);
             data.setIsenabled3(true);
+            data.setString0("");
+            data.set_string1("");
 
             System.out.println(data.getName());
             System.out.println(data.getEnabled0());
