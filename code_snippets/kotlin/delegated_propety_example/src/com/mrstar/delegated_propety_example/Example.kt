@@ -3,22 +3,21 @@ package com.mrstar.delegated_propety_example
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class IntRestrictedProperty(val minValue:Int, val maxValue:Int, initValue:Int = 0) : ReadWriteProperty<Any?, Int> {
-    var intValue = clamp(initValue) // TODO is valid calling?
+class IntRestrictedProperty(minValue:Int, maxValue:Int, initValue:Int = 0) : ReadWriteProperty<Any?, Int> {
+    val valueRange = IntRange(minValue, maxValue)
+    var currentValue = valueRange.clamp(initValue)
 
-    override fun getValue(thisRef: Any?, prop: KProperty<*>): Int = intValue
+    override fun getValue(thisRef: Any?, prop: KProperty<*>): Int = currentValue
 
     override fun setValue(thisRef: Any?, prop: KProperty<*>, value: Int) {
-        intValue = clamp(value)
+        currentValue = valueRange.clamp(value)
     }
 
-    fun clamp (value:Int) : Int =
-            if (value < minValue) {
-                minValue
-            } else if (value > maxValue){
-                maxValue
-            } else {
-                value
+    fun IntRange.clamp (value:Int) : Int =
+            when(true) {
+                contains(value) -> value
+                value < start -> start
+                else -> endInclusive
             }
 }
 
