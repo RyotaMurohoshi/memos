@@ -31,9 +31,9 @@ class ExamResult(val subject:String) {
 fun main(args: Array<String>) {
     val japanese = ExamResult("国語")
     japanese.point = -10
-    println(japanese) // 国語 : 100
+    println(japanese) // 国語 : 0
 
     val english = ExamResult("英語")
     english.point = 110
-    println(english) // 英語 : 0
+    println(english) // 英語 : 100
 }
