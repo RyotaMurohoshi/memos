@@ -3,6 +3,7 @@ package com.mrstar.delegated_propety_example
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
+// Thanks https://t.co/2vYQDlBfBu
 class IntRestrictedProperty(minValue:Int, maxValue:Int, initValue:Int = 0) : ReadWriteProperty<Any?, Int> {
     val valueRange = IntRange(minValue, maxValue)
     var currentValue = valueRange.clamp(initValue)
