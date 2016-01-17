@@ -4,7 +4,7 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 class IntRestrictedProperty(val minValue:Int, val maxValue:Int, initValue:Int = 0) : ReadWriteProperty<Any?, Int> {
-    var intValue = initValue
+    var intValue = clamp(initValue) // TODO is valid calling?
 
     override fun getValue(thisRef: Any?, prop: KProperty<*>): Int = intValue
 
