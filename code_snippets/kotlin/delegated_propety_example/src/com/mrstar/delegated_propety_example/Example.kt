@@ -3,7 +3,7 @@ package com.mrstar.delegated_propety_example
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class IntRestrictedProperty(val minValue:Int, val maxValue:Int, initValue:Int) : ReadWriteProperty<Any?, Int> {
+class IntRestrictedProperty(val minValue:Int, val maxValue:Int, initValue:Int = 0) : ReadWriteProperty<Any?, Int> {
     var intValue = initValue
 
     override fun getValue(thisRef: Any?, prop: KProperty<*>): Int = intValue
@@ -23,7 +23,7 @@ class IntRestrictedProperty(val minValue:Int, val maxValue:Int, initValue:Int) :
 }
 
 class ExamResult(val subject:String) {
-    var point: Int by IntRestrictedProperty(minValue = 0, maxValue = 100, initValue = 0)
+    var point: Int by IntRestrictedProperty(minValue = 0, maxValue = 100)
 
     override fun toString(): String = "${subject} : ${point}"
 }
