@@ -57,4 +57,14 @@ fun main(args: Array<String>) {
     getterSetterExample.set_enabled4(true)
     getterSetterExample.isenabled5(true)
     getterSetterExample.setenabled6(true)
+
+    val person = Person("Ryota", 27)
+    println(person.name)
+    println(person.age)
+
+    // person.name = "RyotaMurohoshi"
+    person.age = 28
+
+    println(person.name)
+    println(person.age)
 }
