@@ -148,7 +148,7 @@ type Test() =
 
     [<Test>]
     [<ExpectedException(typeof<System.ArgumentException>)>]
-    member x.testTail_Exception() =
+    member x.TestTail_Exception() =
          [] |> List.tail
 
     [<Test>]
@@ -161,3 +161,9 @@ type Test() =
         Assert.AreEqual([-2; -1; 0; 1] |> List.chunkBySize 2, [[-2; -1]; [0; 1]])
         Assert.AreEqual([-2; -1] |> List.chunkBySize 2, [[-2; -1]])
         Assert.AreEqual([-2] |> List.chunkBySize 2, [[-2]])
+
+    [<Test>]
+    member x.TestContains() =
+        Assert.IsTrue([-2; -1; 0; 1; 2] |> List.contains 0);
+        Assert.IsFalse([-2; -1; 0; 1; 2] |> List.contains 3);
+        Assert.IsFalse([] |> List.contains 2);
