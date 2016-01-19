@@ -1,10 +1,11 @@
 package com.mrstar;
 
-import com.mrstar.executor.Executor;
+import com.mrstar.versioning_problem.framework.Framework;
 
 public class Main {
 
     public static void main(String[] args) {
-        new Executor().execute();
+        Framework.showTitle();
+        Framework.shoeMessage();
     }
 }
