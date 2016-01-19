@@ -80,7 +80,7 @@ public class Main {
 
         {
             KData0 kData0 = new KData0(true, "xxxxx");
-            System.out.println(kData0.isValid(););
+            System.out.println(kData0.isValid());
             System.out.println(kData0.isEnabled());
 
             kData0.setEnabled(true);
@@ -89,7 +89,7 @@ public class Main {
 
         {
             KData1 kData1 = new KData1(true, "xxxxx");
-            System.out.println(kData1.is_valid(););
+            System.out.println(kData1.is_valid());
             System.out.println(kData1.is_enabled());
 
             kData1.set_enabled(true);
