@@ -5,8 +5,8 @@ public final class Core {
     }
 
     public static String getTitle() {
-        return "ほげふが";
+        return "メインページ";
     }
 
-    public final static String MESSAGE = "ぴよぴよ！";
+    public final static String MESSAGE = "こんにちは！";
 }
