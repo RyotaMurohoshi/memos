@@ -167,3 +167,27 @@ type Test() =
         Assert.IsTrue([-2; -1; 0; 1; 2] |> List.contains 0);
         Assert.IsFalse([-2; -1; 0; 1; 2] |> List.contains 3);
         Assert.IsFalse([] |> List.contains 2);
+
+    [<Test>]
+    member x.TestCollect() =
+        let nTimesReplicateN = fun n -> List.replicate n n
+        Assert.AreEqual([1; 2; 3] |> List.collect nTimesReplicateN, [1; 2; 2; 3; 3; 3]);
+        let returnEmptyList = fun n -> []
+        Assert.AreEqual([1; 2; 3] |> List.collect returnEmptyList, []);
+
+    [<Test>]
+    member x.TestDistinct() =
+        Assert.AreEqual([1; 2; 3] |> List.distinct, [1; 2; 3]);
+        Assert.AreEqual([1; 2; 3; 2; 1] |> List.distinct, [1; 2; 3]);
+        Assert.AreEqual([2; 2; 3; 3; 3; 1;] |> List.distinct, [2; 3; 1]);
+        Assert.AreEqual([1; 1; 1; 1] |> List.distinct, [1]);
+        Assert.AreEqual([] |> List.distinct, []);
+
+    [<Test>]
+    member x.TestConcat() =
+        Assert.AreEqual(List.concat [[1; 2; 3] ; [4; 5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[1; 2]; [3 ; 4]; [5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[1]; [2; 3];  [4; 5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[]; [1]; [2; 3];  [4; 5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[]], []);
+        Assert.AreEqual(List.concat [], []);
