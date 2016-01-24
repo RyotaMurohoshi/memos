@@ -174,3 +174,11 @@ type Test() =
         Assert.AreEqual([1; 2; 3] |> List.collect nTimesReplicateN, [1; 2; 2; 3; 3; 3]);
         let returnEmptyList = fun n -> []
         Assert.AreEqual([1; 2; 3] |> List.collect returnEmptyList, []);
+
+    [<Test>]
+    member x.TestDistinct() =
+        Assert.AreEqual([1; 2; 3] |> List.distinct, [1; 2; 3]);
+        Assert.AreEqual([1; 2; 3; 2; 1] |> List.distinct, [1; 2; 3]);
+        Assert.AreEqual([2; 2; 3; 3; 3; 1;] |> List.distinct, [2; 3; 1]);
+        Assert.AreEqual([1; 1; 1; 1] |> List.distinct, [1]);
+        Assert.AreEqual([] |> List.distinct, []);
