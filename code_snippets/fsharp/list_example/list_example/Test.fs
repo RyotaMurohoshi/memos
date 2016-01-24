@@ -182,3 +182,12 @@ type Test() =
         Assert.AreEqual([2; 2; 3; 3; 3; 1;] |> List.distinct, [2; 3; 1]);
         Assert.AreEqual([1; 1; 1; 1] |> List.distinct, [1]);
         Assert.AreEqual([] |> List.distinct, []);
+
+    [<Test>]
+    member x.TestConcat() =
+        Assert.AreEqual(List.concat [[1; 2; 3] ; [4; 5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[1; 2]; [3 ; 4]; [5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[1]; [2; 3];  [4; 5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[]; [1]; [2; 3];  [4; 5; 6]], [1; 2; 3; 4; 5; 6]);
+        Assert.AreEqual(List.concat [[]], []);
+        Assert.AreEqual(List.concat [], []);
