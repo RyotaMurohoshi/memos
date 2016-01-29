@@ -22,7 +22,14 @@ console.log(source.aggregate((acc, elem) => acc + elem));
 console.log(source.scan((acc, elem) => acc + elem).toArray());
 
 console.log(source.count(it => it % 2 == 0));
+console.log(Ix.Enumerable
+    .fromArray(["JavaScript", "TypeScript", "CoffeScript", "Elm"])
+    .maxBy(it => it.length)
+    .toArray());
 
+console.log(Ix.Enumerable
+    .fromArray(["JavaScript", "TypeScript", "CoffeScript", "Elm"])
+    .max(it => it.length));
 
 console.log(source
     .bufferWithCount(3, 2)
