@@ -21,6 +21,9 @@ console.log(source
 console.log(source.aggregate((acc, elem) => acc + elem));
 console.log(source.scan((acc, elem) => acc + elem).toArray());
 
+console.log(source.count(it => it % 2 == 0));
+
+
 console.log(source
     .bufferWithCount(3, 2)
     .map(it => it.toArray())
