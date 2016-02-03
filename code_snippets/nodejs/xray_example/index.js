@@ -13,14 +13,33 @@ function show(error, result) {
 }
 
 function simpleExample() {
-    let selector = '#main > div > div > div.col-md-3.col-sm-3.col-xs-12.newUserPageProfile > div > div.col-xs-8.col-sm-12 > h3';
+    let selector = 'div.publicItem_body > h1 > a@href';
     x(url, selector)(show);
 }
 
 function arrayExample() {
-    let selector = ['a@href'];
+    let selector = ['div.publicItem_body > h1 > a@href'];
     x(url, selector)(show);
 }
 
+function creatorExample() {
+    let selector = 'div.publicItem_body > h1'
+    let creator = { url: 'a@href', title: 'a' };
+    x(url, selector, creator)(show);
+}
 
-arrayExample();
+function creatorArrayExample() {
+    let selector = 'div.publicItem_body > h1'
+    let creator = [{ url: 'a@href', title: 'a' }];
+    x(url, selector, creator)(show);
+}
+
+function paginateExample() {
+    let selector = 'div.publicItem_body > h1'
+    let creator = [{ url: 'a@href', title: 'a' }];
+    x(url, selector, creator)
+        .paginate('a[rel=next]@href')
+        (show);
+}
+
+paginateExample();
