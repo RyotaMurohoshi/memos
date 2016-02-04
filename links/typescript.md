@@ -1,0 +1,5 @@
+* [Github](https://github.com/Microsoft/TypeScript)
+* [Quick tutorial](http://www.typescriptlang.org/Tutorial)
+* [Programming handbook](http://www.typescriptlang.org/Handbook)
+* [Language specification](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md)
+* [Homepage](http://www.typescriptlang.org/)
